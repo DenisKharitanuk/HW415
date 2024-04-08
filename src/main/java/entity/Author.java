@@ -8,5 +8,4 @@ public class Author {
     private String firstName;
     private String familyName;
     private String secondName;
-
 }

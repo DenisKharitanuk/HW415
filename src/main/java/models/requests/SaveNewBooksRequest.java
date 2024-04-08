@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import entity.Author;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetAllAuthorsBooksRequestXMLPOST {
+public class SaveNewBooksRequest {
+    private String bookTitle;
     private Author author;
-    private int id;
-    private String header;
+    private long id;
 }

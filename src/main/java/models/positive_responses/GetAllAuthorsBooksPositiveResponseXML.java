@@ -5,17 +5,12 @@ import entity.Author;
 import entity.Book;
 
 import java.util.List;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetAllAuthorsBooksPositiveResponseGET {
+public class GetAllAuthorsBooksPositiveResponseXML {
+    private Map<Author, List<Book>> authorsBooks;
     private List<Book> books;
-    private Book book;
-    private long bookId;
-    private String bookTitle;
-
     private Author author;
-    private long authorId;
-    private String firstName;
-    private String secondName;
-    private String familyName;
+    private Book book;
 }
