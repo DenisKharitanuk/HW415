@@ -6,6 +6,5 @@ import entity.Author;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SaveNewBooksRequest {
     private String bookTitle;
-    private Author author;
     private long id;
 }

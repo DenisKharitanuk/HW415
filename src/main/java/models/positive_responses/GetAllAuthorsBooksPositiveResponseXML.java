@@ -9,8 +9,5 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetAllAuthorsBooksPositiveResponseXML {
-    private Map<Author, List<Book>> authorsBooks;
-    private List<Book> books;
-    private Author author;
-    private Book book;
+    private GetAllAuthorsBooksPositiveResponse response;
 }

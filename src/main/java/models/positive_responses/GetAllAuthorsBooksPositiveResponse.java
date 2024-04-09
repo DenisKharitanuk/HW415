@@ -9,6 +9,4 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetAllAuthorsBooksPositiveResponse {
     private List<Book> books;
-    private Book book;
-    private Author author;
 }
