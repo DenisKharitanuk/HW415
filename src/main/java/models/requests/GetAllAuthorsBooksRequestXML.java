@@ -1,9 +1,11 @@
 package models.requests;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import entity.Author;
+import lombok.Data;
 
+
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetAllAuthorsBooksRequestXML {
-    private Author author;
+    private long id;
 }
