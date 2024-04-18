@@ -39,3 +39,5 @@ build/
 
 .idea
 /.idea/
+/.gradle/
+/allure-results/

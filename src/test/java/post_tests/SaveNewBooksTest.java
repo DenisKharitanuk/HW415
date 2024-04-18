@@ -1,15 +1,18 @@
-package POSTtests;
+package post_tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
-import io.restassured.response.ValidatableResponse;
+import models.positive_responses.GetAllAuthorsBooksPositiveResponse;
 import models.positive_responses.SaveNewAuthorPositiveResponse;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import steps.Specifications;
 import steps.asertsResponses.GetAllBookAssert;
+
+import java.util.List;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static steps.Specifications.*;
 
 @Epic("PostTests")
 @Story("saveNewBook")
@@ -19,14 +22,15 @@ public class SaveNewBooksTest {
     @Description("The book is saved, status code 201, the response returns the id of the saved book")
     @Test
     public void saveBookTest(){
-        SaveNewAuthorPositiveResponse author = Specifications.requestSpecSaveNewAuthor(RandomStringUtils.randomAlphabetic(5),
-                RandomStringUtils.randomAlphabetic(5), RandomStringUtils.randomAlphabetic(5), 200);
+        SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(5),
+                randomAlphabetic(5), randomAlphabetic(5), 201);
         long id = author.getAuthorId();
 
         String bookTitle = "Maleus maleficarum";
-        Specifications.requestSpecSaveNewBook(bookTitle, id, 201);
+        requestSpecSaveNewBook(bookTitle, id, 201);
 
-        ValidatableResponse allBooks = (ValidatableResponse) Specifications.requestSpecGetAllBooksJSON(String.valueOf(id), 200);
+        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 201);
+
         GetAllBookAssert.verifyBodyGetBooks(allBooks, id, bookTitle);
     }
 }

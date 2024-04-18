@@ -129,6 +129,14 @@ public class Specifications {
                 .extract().as(NegativeResponses.class);
 
    }
+    public static NegativeResponses requestSpecGetAllBookNegativeNull(int statusCode){
+        return given().spec(requestSpecJSON())
+                .when()
+                .get(Endpoints.GET_ALL_BOOKS_URL)
+                .then().spec(responseSpec(statusCode))
+                .extract().as(NegativeResponses.class);
+
+    }
 
    public static NegativeResponses requestSpecGetAllBooksXMLNegative(long id, int statusCode){
         return given().spec(requestSpecXML())
