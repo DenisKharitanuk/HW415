@@ -26,14 +26,14 @@ public class GetAllAuthorsBooksTest {
     @ValueSource(longs = {10})
     public void getAllAuthorsBooksTest() {
         SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(5),
-                randomAlphabetic(5), randomAlphabetic(5), 201);
+                randomAlphabetic(5), randomAlphabetic(5), 200);
 
         long id = author.getAuthorId();
 
         String bookTitle = "Flugegihaimer";
-        requestSpecSaveNewBook("Flugegihaimer", id, 201);
+        requestSpecSaveNewBook("Flugegihaimer", id, 200);
 
-        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 201);
+        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 200);
 
         GetAllBookAssert.verifyBodyGetBooks(allBooks, id, bookTitle);
     }

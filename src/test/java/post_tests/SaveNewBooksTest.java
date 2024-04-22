@@ -23,13 +23,13 @@ public class SaveNewBooksTest {
     @Test
     public void saveBookTest(){
         SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(5),
-                randomAlphabetic(5), randomAlphabetic(5), 201);
+                randomAlphabetic(5), randomAlphabetic(5), 200);
         long id = author.getAuthorId();
 
         String bookTitle = "Maleus maleficarum";
-        requestSpecSaveNewBook(bookTitle, id, 201);
+        requestSpecSaveNewBook(bookTitle, id, 200);
 
-        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 201);
+        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 200);
 
         GetAllBookAssert.verifyBodyGetBooks(allBooks, id, bookTitle);
     }

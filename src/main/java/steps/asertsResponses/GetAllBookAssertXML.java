@@ -1,12 +1,22 @@
 package steps.asertsResponses;
 
+import entity.Book;
 import models.positive_responses.GetAllAuthorsBooksPositiveResponseXML;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Optional;
+
 public class GetAllBookAssertXML {
     public static void verifyBodyGetBooksXML(GetAllAuthorsBooksPositiveResponseXML allBooks, long id, String bookTitle) {
-        assertEquals (allBooks.getBooks().get(0).getBooks().get(0).getBookTitle(),bookTitle);
-        assertEquals(allBooks.getBooks().get(0).getBooks().get(0).getId(),id);
+        Optional<Book> firstBookOptional = allBooks.getBooks().getBooks().stream().findFirst();
+
+        if (firstBookOptional.isPresent()) {
+            Book firstBook = firstBookOptional.get();
+            assertEquals(firstBook.getBookTitle(), bookTitle);
+            assertEquals(firstBook.getId(), id);
+        } else {
+            throw new AssertionError("No books found in the response.");
+        }
     }
 }

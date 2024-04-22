@@ -1,6 +1,7 @@
 package models.requests;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import entity.Author;
 import lombok.*;
 
 @Data
@@ -11,8 +12,4 @@ public class SaveNewAuthorRequest {
     private String firstName;
     private String familyName;
     private String secondName;
-
-
-    public SaveNewAuthorRequest(long authorID) {
-    }
 }

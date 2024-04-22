@@ -1,6 +1,7 @@
 package models.requests;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import entity.Author;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,5 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SaveNewBooksRequest {
     private String bookTitle;
-
-    private SaveNewAuthorRequest id;
+    private Author author;
 }

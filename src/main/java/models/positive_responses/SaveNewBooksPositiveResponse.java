@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SaveNewBooksPositiveResponse {
     private long bookId;
-
 }

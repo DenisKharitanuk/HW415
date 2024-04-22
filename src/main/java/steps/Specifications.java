@@ -1,5 +1,6 @@
 package steps;
 
+import entity.Author;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -51,7 +52,6 @@ public class Specifications {
     }
 
 
-
     public static SaveNewAuthorPositiveResponse requestSpecSaveNewAuthor(String firstName, String familyName, String secondName, int statusCode) {
         SaveNewAuthorRequest author = new SaveNewAuthorRequest(firstName, familyName, secondName);
         return given()
@@ -63,6 +63,7 @@ public class Specifications {
                 .spec(responseSpec(statusCode))
                 .extract().as(SaveNewAuthorPositiveResponse.class);
     }
+
     public static NegativeResponses requestSpecSaveNewAuthorNegative(String firstName, String familyName, String secondName, int statusCode) {
         SaveNewAuthorRequest author = new SaveNewAuthorRequest(firstName, familyName, secondName);
         return given()
@@ -76,8 +77,8 @@ public class Specifications {
     }
 
     public static SaveNewBooksPositiveResponse requestSpecSaveNewBook(String bookTitle, long authorID, int statusCode) {
-        SaveNewAuthorRequest author = new SaveNewAuthorRequest(authorID);
-        SaveNewBooksRequest book= new  SaveNewBooksRequest(bookTitle, author);
+        Author author = new Author(authorID);
+        SaveNewBooksRequest book = new SaveNewBooksRequest(bookTitle, author);
 
         return given()
                 .spec(requestSpecJSON())
@@ -87,9 +88,10 @@ public class Specifications {
                 .then().spec(responseSpec(statusCode))
                 .extract().as(SaveNewBooksPositiveResponse.class);
     }
+
     public static NegativeResponses requestSpecSaveNewBookNegative(String bookTitle, long authorID, int statusCode) {
-        SaveNewAuthorRequest author = new SaveNewAuthorRequest(authorID);
-        SaveNewBooksRequest book= new  SaveNewBooksRequest(bookTitle, author);
+        Author author = new Author(authorID);
+        SaveNewBooksRequest book = new SaveNewBooksRequest(bookTitle, author);
 
         return given()
                 .spec(requestSpecJSON())
@@ -100,7 +102,7 @@ public class Specifications {
                 .extract().as(NegativeResponses.class);
     }
 
-    public static GetAllAuthorsBooksPositiveResponseXML requestSpecGetAllBooksXML(long id, int statusCode){
+    public static GetAllAuthorsBooksPositiveResponseXML requestSpecGetAllBooksXML(long id, int statusCode) {
         GetAllAuthorsBooksRequestXML author = new GetAllAuthorsBooksRequestXML();
         author.setId(id);
 
@@ -112,7 +114,7 @@ public class Specifications {
                 .extract().as(GetAllAuthorsBooksPositiveResponseXML.class);
     }
 
-    public static List<GetAllAuthorsBooksPositiveResponse> requestSpecGetAllBooksJSON(String id, int statusCode){
+    public static List<GetAllAuthorsBooksPositiveResponse> requestSpecGetAllBooksJSON(String id, int statusCode) {
         return given().spec(requestSpecJSON())
                 .when()
                 .get(Endpoints.GET_ALL_BOOKS_URL, id)
@@ -121,15 +123,7 @@ public class Specifications {
     }
 
 
-   public static NegativeResponses requestSpecGetAllBookNegative(String id, int statusCode){
-        return given().spec(requestSpecJSON())
-                .when()
-                .get(Endpoints.GET_ALL_BOOKS_URL)
-                .then().spec(responseSpec(statusCode))
-                .extract().as(NegativeResponses.class);
-
-   }
-    public static NegativeResponses requestSpecGetAllBookNegativeNull(int statusCode){
+    public static NegativeResponses requestSpecGetAllBookNegative(String id, int statusCode) {
         return given().spec(requestSpecJSON())
                 .when()
                 .get(Endpoints.GET_ALL_BOOKS_URL)
@@ -138,12 +132,20 @@ public class Specifications {
 
     }
 
-   public static NegativeResponses requestSpecGetAllBooksXMLNegative(long id, int statusCode){
+    public static NegativeResponses requestSpecGetAllBookNegativeNull(int statusCode) {
+        return given().spec(requestSpecJSON())
+                .when()
+                .get(Endpoints.GET_ALL_BOOKS_URL)
+                .then().spec(responseSpec(statusCode))
+                .extract().as(NegativeResponses.class);
+
+    }
+
+    public static NegativeResponses requestSpecGetAllBooksXMLNegative(long id, int statusCode) {
         return given().spec(requestSpecXML())
                 .when()
                 .get(Endpoints.GET_ALL_BOOKS_XML_URL)
                 .then().spec(responseSpec(statusCode))
                 .extract().as(NegativeResponses.class);
-   }
-
+    }
 }
