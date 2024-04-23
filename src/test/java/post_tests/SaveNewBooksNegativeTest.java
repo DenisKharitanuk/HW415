@@ -36,7 +36,6 @@ public class SaveNewBooksNegativeTest {
 
     @DisplayName("Saving a new book with an empty bookTitle")
     @Description("The book is not saved, status code 400, error 1001")
-    @ParameterizedTest(name = "bookTitle = {0}")
     @NullSource
     public void saveBookNullTitle(String bookTitle) {
         NegativeResponses response =requestSpecSaveNewBookNegative(bookTitle, 1, 400);
