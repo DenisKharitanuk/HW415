@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetAllAuthorsBooksRequest {
-    private String id;
+    private long id;
 }

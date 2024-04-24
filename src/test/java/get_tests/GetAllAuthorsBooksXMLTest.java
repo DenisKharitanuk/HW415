@@ -22,7 +22,8 @@ public class GetAllAuthorsBooksXMLTest {
     @ParameterizedTest(name = "id = {0}")
     @ValueSource(longs = {10})
     public void getAllAuthorsBooksTest() {
-        SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(3), randomAlphabetic(3), randomAlphabetic(3), 201);
+        SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(3),
+                randomAlphabetic(3), randomAlphabetic(3), 201);
         long id = author.getAuthorId();
 
         String bookTitle = "GG landed in Grodno";

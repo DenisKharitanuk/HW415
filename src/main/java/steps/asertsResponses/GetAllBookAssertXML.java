@@ -11,12 +11,8 @@ public class GetAllBookAssertXML {
     public static void verifyBodyGetBooksXML(GetAllAuthorsBooksPositiveResponseXML allBooks, long id, String bookTitle) {
         Optional<Book> firstBookOptional = allBooks.getBooks().getBooks().stream().findFirst();
 
-        if (firstBookOptional.isPresent()) {
-            Book firstBook = firstBookOptional.get();
-            assertEquals(firstBook.getBookTitle(), bookTitle);
-            assertEquals(firstBook.getId(), id);
-        } else {
-            throw new AssertionError("No books found in the response.");
-        }
+        Book firstBook = firstBookOptional.get();
+        assertEquals(firstBook.getBookTitle(), bookTitle);
+        assertEquals(firstBook.getId(), id);
     }
 }

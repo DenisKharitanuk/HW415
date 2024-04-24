@@ -22,7 +22,7 @@ public class SaveNewBooksNegativeTest {
     @Test
     public void saveBookUnknownAuthorTest() {
         NegativeResponses response = requestSpecSaveNewBookNegative("Book", 666, 409);
-        verifyBodyNegative(response, "1004", "Author is not exist");
+        verifyBodyNegative(response, "1004", "Указанный автор не существует в таблице");
     }
 
     @DisplayName("Saving a new book with a negative id")
@@ -31,14 +31,15 @@ public class SaveNewBooksNegativeTest {
     @ValueSource(longs = {-1, -2,})
     public void saveBookNegativeId(long id) {
         NegativeResponses response = requestSpecSaveNewBookNegative("Title", id, 409);
-        verifyBodyNegative(response, "1004", "Author is not exist");
+        verifyBodyNegative(response, "1004", "Указанный автор не существует в таблице");
     }
 
     @DisplayName("Saving a new book with an empty bookTitle")
     @Description("The book is not saved, status code 400, error 1001")
+    @ParameterizedTest
     @NullSource
     public void saveBookNullTitle(String bookTitle) {
-        NegativeResponses response =requestSpecSaveNewBookNegative(bookTitle, 1, 400);
-        verifyBodyNegative(response, "Validation failed", "Required parameter not passed: bookTitle");
+        NegativeResponses response = requestSpecSaveNewBookNegative(bookTitle, 1, 400);
+        verifyBodyNegative(response, "Валидация не пройдена", "Не передан обязательный параметр: bookTitle");
     }
 }

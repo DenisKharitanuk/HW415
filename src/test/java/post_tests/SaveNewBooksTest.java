@@ -19,17 +19,17 @@ import static steps.Specifications.*;
 public class SaveNewBooksTest {
 
     @DisplayName("New book save")
-    @Description("The book is saved, status code 201, the response returns the id of the saved book")
+    @Description("The book is saved, status code 200, the response returns the id of the saved book")
     @Test
     public void saveBookTest(){
         SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(5),
-                randomAlphabetic(5), randomAlphabetic(5), 200);
+                randomAlphabetic(5), randomAlphabetic(5), 201);
         long id = author.getAuthorId();
 
         String bookTitle = "Maleus maleficarum";
-        requestSpecSaveNewBook(bookTitle, id, 200);
+        requestSpecSaveNewBook(bookTitle, id, 201);
 
-        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 200);
+        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 201);
 
         GetAllBookAssert.verifyBodyGetBooks(allBooks, id, bookTitle);
     }

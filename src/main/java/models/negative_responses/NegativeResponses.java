@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NegativeResponses {
-    private int errorCode;
+    private String errorCode;
     private String errorMessage;
     private String errorDetails;
 }
