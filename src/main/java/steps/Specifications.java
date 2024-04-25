@@ -126,7 +126,7 @@ public class Specifications {
     public static NegativeResponses requestSpecGetAllBookNegative(String id, int statusCode) {
         return given().spec(requestSpecJSON())
                 .when()
-                .get(Endpoints.GET_ALL_BOOKS_URL)
+                .get(Endpoints.GET_ALL_BOOKS_URL,id)
                 .then().spec(responseSpec(statusCode))
                 .extract().as(NegativeResponses.class);
 
@@ -135,7 +135,7 @@ public class Specifications {
     public static NegativeResponses requestSpecGetAllBookNegativeNull(int statusCode) {
         return given().spec(requestSpecJSON())
                 .when()
-                .get(Endpoints.GET_ALL_BOOKS_URL)
+                .get("/library/authors/" + null + "/books")
                 .then().spec(responseSpec(statusCode))
                 .extract().as(NegativeResponses.class);
 

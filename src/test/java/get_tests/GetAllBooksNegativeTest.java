@@ -22,7 +22,7 @@ public class GetAllBooksNegativeTest {
     @Test
     public void getAllBooksUnknownAuthorTest(){
         NegativeResponses response = requestSpecGetAllBookNegative("1553", 409);
-        verifyBodyNegative(response, "1004", "Author is not exist");
+        verifyBodyNegative(response, "1004", "Указанный автор не существует в таблице");
     }
 
     @DisplayName("Get a list of books , id is specified in incorrect format")
@@ -31,17 +31,17 @@ public class GetAllBooksNegativeTest {
     @ValueSource(strings = {"incorrectID"," ","null"})
     public void getAllBooksIdWrongFormatTest(String id){
         NegativeResponses response =requestSpecGetAllBookNegative(id, 400);
-        verifyBodyNegative(response, "1001", "Incorrect input format");
+        verifyBodyNegative(response, "1001", "Некорректный обязательный параметр");
 
     }
 
     @DisplayName("Get a list of all books with negative id")
-    @Description("Book list is not exist, status code 400")
+    @Description("Book list is not exist, status code 409")
     @ParameterizedTest(name = "id = {0}")
     @ValueSource (strings = {"-1","-2"})
     public void getAllBooksIdNegativeTest(String id){
-        NegativeResponses response = requestSpecGetAllBookNegative(id, 400);
-        verifyBodyNegative(response, "1004", "Author is not exist");
+        NegativeResponses response = requestSpecGetAllBookNegative(id, 409);
+        verifyBodyNegative(response, "1004", "Указанный автор не существует в таблице");
     }
 
     @DisplayName("Get a list of all books without  id")
@@ -49,6 +49,6 @@ public class GetAllBooksNegativeTest {
     @Test
     public void getAllBooksIdNullTest(){
         NegativeResponses  response = requestSpecGetAllBookNegativeNull(400);
-        verifyBodyNegative(response, "1001", "Invalid required parameter");
+        verifyBodyNegative(response, "1001", "Некорректный обязательный параметр");
     }
 }
