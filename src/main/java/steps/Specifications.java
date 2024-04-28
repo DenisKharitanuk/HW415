@@ -6,6 +6,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
+import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import models.negative_responses.NegativeResponses;
@@ -114,14 +115,12 @@ public class Specifications {
                 .extract().as(GetAllAuthorsBooksPositiveResponseXML.class);
     }
 
-    public static List<GetAllAuthorsBooksPositiveResponse> requestSpecGetAllBooksJSON(String id, int statusCode) {
-        return given().spec(requestSpecJSON())
-                .when()
-                .get(Endpoints.GET_ALL_BOOKS_URL, id)
-                .then().spec(responseSpec(statusCode))
-                .extract().jsonPath().getList(".", GetAllAuthorsBooksPositiveResponse.class);
-    }
-
+public static ValidatableResponse requestSpecGetAllBooksJSON(String id, int statusCode) {
+    return given().spec(requestSpecJSON())
+            .when()
+            .get(Endpoints.GET_ALL_BOOKS_URL, id)
+            .then().spec(responseSpec(statusCode));
+}
 
     public static NegativeResponses requestSpecGetAllBookNegative(String id, int statusCode) {
         return given().spec(requestSpecJSON())

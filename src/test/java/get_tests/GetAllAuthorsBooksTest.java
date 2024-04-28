@@ -3,11 +3,13 @@ package get_tests;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
+import io.restassured.response.ValidatableResponse;
 import models.positive_responses.GetAllAuthorsBooksPositiveResponse;
 import models.positive_responses.SaveNewAuthorPositiveResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import steps.Specifications;
 import steps.asertsResponses.GetAllBookAssert;
 
 import java.util.List;
@@ -30,11 +32,10 @@ public class GetAllAuthorsBooksTest {
 
         long id = author.getAuthorId();
 
-        String bookTitle = "Flugegihaimer";
-        requestSpecSaveNewBook("Flugegihaimer", id, 201);
+        String bookTitle = randomAlphabetic(5);
+        requestSpecSaveNewBook(bookTitle, id, 201);
 
-        List<GetAllAuthorsBooksPositiveResponse> allBooks = requestSpecGetAllBooksJSON(String.valueOf(id), 200);
-
+        ValidatableResponse allBooks = Specifications.requestSpecGetAllBooksJSON(String.valueOf(id), 200);
         GetAllBookAssert.verifyBodyGetBooks(allBooks, id, bookTitle);
     }
 }
