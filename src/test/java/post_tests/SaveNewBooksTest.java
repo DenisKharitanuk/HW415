@@ -30,8 +30,6 @@ public class SaveNewBooksTest {
             String bookTitle = randomAlphabetic(5);
             Specifications.requestSpecSaveNewBook(bookTitle, id, 201);
 
-
-
             ValidatableResponse allBooks = Specifications.requestSpecGetAllBooksJSON(String.valueOf(id), 200);
             GetAllBookAssert.verifyBodyGetBooks(allBooks, id, bookTitle);
         }

@@ -12,11 +12,6 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetAllAuthorsBooksPositiveResponse {
-
-//    private Book books;
-//    private SaveNewAuthorPositiveResponse author;
-//
-
-    private Book bookTitle;
+    private String bookTitle;
     private Author author;
 }
