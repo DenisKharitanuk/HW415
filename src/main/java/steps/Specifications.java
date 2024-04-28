@@ -135,7 +135,7 @@ public class Specifications {
     public static NegativeResponses requestSpecGetAllBookNegativeNull(int statusCode) {
         return given().spec(requestSpecJSON())
                 .when()
-                .get("/library/authors/" + null + "/books")
+                .get("/library/authors/"+null+"/books")
                 .then().spec(responseSpec(statusCode))
                 .extract().as(NegativeResponses.class);
 
