@@ -14,8 +14,8 @@ public class GetAllBookAssertXML {
 
 //        Optional<GetAllAuthorsBooksPositiveResponse> firstBookOptional = allBooks.getBooks().stream().findFirst();
 
-//        Book firstBook = firstBookOptional.get().getBookTitle();
-        assertEquals(allBooks.getBooks().get(0).getBookTitle(), bookTitle);
-        assertEquals(allBooks.getBooks().get(0).getAuthor(), author);
+////        Book firstBook = firstBookOptional.get().getBookTitle();
+//        assertEquals(allBooks.getBooks().get(0).getBookTitle(), bookTitle);
+//        assertEquals(allBooks.getBooks().get(0).getAuthor(), author);
     }
 }

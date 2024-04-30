@@ -11,10 +11,10 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GetAllBookAssert {
-    public static void verifyBodyGetBooks(ValidatableResponse allBooks, long id, String bookTitle) {
-        allBooks.assertThat()
-                .body("find{it.bookTitle=='" + bookTitle + "'}.bookTitle", equalTo(bookTitle))
-                .body("author.find{it.id==" + id + "}.id", equalTo((int) id));
+    public static void verifyBodyGetBooks(List<GetAllAuthorsBooksPositiveResponse> allBooks, long id, String bookTitle) {
+
+        assertEquals(allBooks.get(0).getBookTitle(), bookTitle);
+        assertEquals(allBooks.get(0).getAuthor().getId(), id);
     }
 }
 

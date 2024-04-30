@@ -28,15 +28,13 @@ public class GetAllAuthorsBooksXMLTest {
     @ParameterizedTest(name = "id = {0}")
     @ValueSource(longs = {10})
     public void getAllAuthorsBooksTest() {
-        SaveNewAuthorPositiveResponse author1 = Specifications.requestSpecSaveNewAuthor(randomAlphabetic(3), randomAlphabetic(3), randomAlphabetic(3), 201);
+        SaveNewAuthorPositiveResponse author1 = Specifications.requestSpecSaveNewAuthor(randomAlphabetic(3), randomAlphabetic(3),
+                randomAlphabetic(3), 201);
         long id = author1.getAuthorId();
-
         String bookTitle = randomAlphabetic(3);
         Specifications.requestSpecSaveNewBook(bookTitle, id, 201);
-
         GetAllAuthorsBooksPositiveResponseXML listBooksXML = Specifications.requestSpecGetAllBooksXML(id, 200);
         Author author = listBooksXML.getBooks().get(0).getAuthor();
-
         GetAllBookAssertXML.verifyBodyGetBooksXML(listBooksXML, bookTitle, author);
     }
 }

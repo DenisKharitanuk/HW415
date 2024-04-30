@@ -77,8 +77,8 @@ public class Specifications {
                 .extract().as(NegativeResponses.class);
     }
 
-    public static SaveNewBooksPositiveResponse requestSpecSaveNewBook(String bookTitle, long authorID, int statusCode) {
-        Author author = new Author(authorID);
+    public static SaveNewBooksPositiveResponse requestSpecSaveNewBook(String bookTitle, long authorId, int statusCode) {
+        Author author = new Author(authorId);
         SaveNewBooksRequest book = new SaveNewBooksRequest(bookTitle, author);
 
         return given()
@@ -115,11 +115,12 @@ public class Specifications {
                 .extract().as(GetAllAuthorsBooksPositiveResponseXML.class);
     }
 
-public static ValidatableResponse requestSpecGetAllBooksJSON(String id, int statusCode) {
+public static List<GetAllAuthorsBooksPositiveResponse> requestSpecGetAllBooksJSON(String id, int statusCode) {
     return given().spec(requestSpecJSON())
             .when()
             .get(Endpoints.GET_ALL_BOOKS_URL, id)
-            .then().spec(responseSpec(statusCode));
+            .then().spec(responseSpec(statusCode))
+            .extract().jsonPath().getList(".", GetAllAuthorsBooksPositiveResponse.class);
 }
 
     public static NegativeResponses requestSpecGetAllBookNegative(String id, int statusCode) {
