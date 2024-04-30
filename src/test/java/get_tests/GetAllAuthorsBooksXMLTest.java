@@ -33,16 +33,12 @@ public class GetAllAuthorsBooksXMLTest {
     @ParameterizedTest(name = "id = {0}")
     @ValueSource(longs = {10})
     public void getAllAuthorsBooksTest() {
-
         SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(5),
                 randomAlphabetic(5), randomAlphabetic(5), 201);
         long id = author.getAuthorId();
         String bookTitle = randomAlphabetic(5);
         requestSpecSaveNewBook(bookTitle, id, 201);
-
-
         GetAllAuthorsBooksPositiveResponseXML books= requestSpecGetAllBooksXML(id,200);
-
         Author author1 =books.getBook().get(0).getAuthor();
         verifyBodyGetBooksXML(books,bookTitle,author1);
     }
