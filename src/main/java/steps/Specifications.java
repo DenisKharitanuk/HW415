@@ -105,7 +105,7 @@ public class Specifications {
 
     public static GetAllAuthorsBooksPositiveResponseXML requestSpecGetAllBooksXML(long id, int statusCode) {
         GetAllAuthorsBooksRequestXML author = new GetAllAuthorsBooksRequestXML();
-        author.setId(id);
+        author.setAuthorId(id);
 
         return given().spec(requestSpecXML())
                 .body(author)

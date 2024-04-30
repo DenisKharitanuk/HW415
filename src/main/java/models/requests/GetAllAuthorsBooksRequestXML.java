@@ -1,9 +1,8 @@
 package models.requests;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import entity.Author;
+import jakarta.xml.bind.annotation.*;
 import lombok.Data;
 
 
@@ -12,5 +11,7 @@ import lombok.Data;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "author")
 public class GetAllAuthorsBooksRequestXML {
-    private long id;
+
+    @XmlElement(name = "author_id", required = true)
+    private long authorId;
 }

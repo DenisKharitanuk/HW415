@@ -14,5 +14,5 @@ import java.util.List;
 public class GetAllAuthorsBooksPositiveResponseXML {
     @XmlElementWrapper(name = "books")
     @XmlElement(name = "book", required = true)
-   List <GetAllAuthorsBooksPositiveResponse> books;
+    private List <GetAllAuthorsBooksPositiveResponse> book;
 }

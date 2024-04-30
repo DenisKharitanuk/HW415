@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
+import models.positive_responses.GetAllAuthorsBooksPositiveResponse;
 import models.positive_responses.GetAllAuthorsBooksPositiveResponseXML;
 import models.positive_responses.SaveNewAuthorPositiveResponse;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -15,9 +16,13 @@ import steps.Specifications;
 import steps.asertsResponses.GetAllBookAssert;
 import steps.asertsResponses.GetAllBookAssertXML;
 
+import java.util.List;
+
 import static org.apache.commons.lang3.RandomStringUtils.*;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static steps.Specifications.*;
+import static steps.asertsResponses.GetAllBookAssert.verifyBodyGetBooks;
+import static steps.asertsResponses.GetAllBookAssertXML.*;
 
 @Epic("Get Tests")
 @Story("Get all books XML")
@@ -28,13 +33,17 @@ public class GetAllAuthorsBooksXMLTest {
     @ParameterizedTest(name = "id = {0}")
     @ValueSource(longs = {10})
     public void getAllAuthorsBooksTest() {
-        SaveNewAuthorPositiveResponse author1 = Specifications.requestSpecSaveNewAuthor(randomAlphabetic(3), randomAlphabetic(3),
-                randomAlphabetic(3), 201);
-        long id = author1.getAuthorId();
-        String bookTitle = randomAlphabetic(3);
-        Specifications.requestSpecSaveNewBook(bookTitle, id, 201);
-        GetAllAuthorsBooksPositiveResponseXML listBooksXML = Specifications.requestSpecGetAllBooksXML(id, 200);
-        Author author = listBooksXML.getBooks().get(0).getAuthor();
-        GetAllBookAssertXML.verifyBodyGetBooksXML(listBooksXML, bookTitle, author);
+
+        SaveNewAuthorPositiveResponse author = requestSpecSaveNewAuthor(randomAlphabetic(5),
+                randomAlphabetic(5), randomAlphabetic(5), 201);
+        long id = author.getAuthorId();
+        String bookTitle = randomAlphabetic(5);
+        requestSpecSaveNewBook(bookTitle, id, 201);
+
+
+        GetAllAuthorsBooksPositiveResponseXML books= requestSpecGetAllBooksXML(id,200);
+
+        Author author1 =books.getBook().get(0).getAuthor();
+        verifyBodyGetBooksXML(books,bookTitle,author1);
     }
 }
